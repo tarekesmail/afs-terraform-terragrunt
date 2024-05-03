@@ -26,6 +26,7 @@ provider "aws" {
         tags = {
             account = "${local.aws_account_id}"
             environment = "${local.environment}"
+            managed_by = "Terraform_Terragrunt"
         }
     }
 }

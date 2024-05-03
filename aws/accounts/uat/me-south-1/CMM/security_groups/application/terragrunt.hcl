@@ -11,11 +11,11 @@ terraform {
 }
 
 inputs = {
-  name   = "SG-VISIONFLEX-BH5VFSTGSIT01"
-  vpc_id = "vpc-0f20c8a4e0e438497"
+  name   = "SG-CMM-BH5CMMAPPVMUT"
+  vpc_id = "vpc-0390fe94c7c1c98ab"
   ingress_rules = {
     "22/tcp" = {
-      sources     = ["10.10.0.0/16", "10.71.0.0/16", "168.87.158.102/32", "168.87.158.101/32"]
+      sources     = ["10.10.140.0/24", "10.10.180.0/24"]
       description = "allow ingress SSH"
     }
   }

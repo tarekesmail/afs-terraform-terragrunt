@@ -17,22 +17,7 @@ module "eks" {
   iam_role_use_name_prefix = false
   iam_role_description     = "EKS managed node group role"
   access_entries           = var.access_entries
-  cluster_addons = {
-    kube-proxy = {
-      most_recent = true
-    }
-    vpc-cni = {
-      most_recent    = true
-      before_compute = true
-    }
-    coredns = {
-      most_recent = true
-    }
-    aws-ebs-csi-driver = {
-      most_recent = true
-    }
-
-  }
+  cluster_addons           = var.cluster_addons
 
   cluster_enabled_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
   tags                      = var.tags

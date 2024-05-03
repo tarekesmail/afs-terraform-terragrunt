@@ -59,31 +59,6 @@ variable "aws_auth_additional_labels" {
   type        = map(string)
 }
 
-variable "map_accounts" {
-  description = "Additional AWS account numbers to add to the aws-auth configmap. See examples/basic/variables.tf for example format."
-  type        = list(string)
-  default     = []
-}
-
-variable "map_roles" {
-  description = "Additional IAM roles to add to the aws-auth configmap. See examples/basic/variables.tf for example format."
-  type = list(object({
-    rolearn  = string
-    username = string
-    groups   = list(string)
-  }))
-  default = []
-}
-
-variable "map_users" {
-  description = "Additional IAM users to add to the aws-auth configmap. See examples/basic/variables.tf for example format."
-  type = list(object({
-    userarn  = string
-    username = string
-    groups   = list(string)
-  }))
-  default = []
-}
 
 variable "subnets" {
   description = "A list of subnets to place the EKS cluster and workers within."
@@ -360,26 +335,12 @@ variable "cluster_encryption_config" {
   default = []
 }
 
-variable "fargate_profiles" {
-  description = "Fargate profiles to create. See `fargate_profile` keys section in fargate submodule's README.md for more details"
-  type        = any
-  default     = {}
-}
-
-variable "create_fargate_pod_execution_role" {
-  description = "Controls if the EKS Fargate pod execution IAM role should be created."
-  type        = bool
-  default     = true
-}
-
-variable "fargate_pod_execution_role_name" {
-  description = "The IAM Role that provides permissions for the EKS Fargate Profile."
-  type        = string
-  default     = null
-}
-
 variable "cluster_service_ipv4_cidr" {
   description = "service ipv4 cidr for the kubernetes cluster"
   type        = string
   default     = null
+}
+
+variable "cluster_addons" {
+  type = any
 }

@@ -29,6 +29,24 @@ inputs = {
       }
     }
   }
+
+  cluster_addons = {
+    kube-proxy = {
+      most_recent = true
+    }
+    vpc-cni = {
+      most_recent    = true
+      before_compute = true
+    }
+    coredns = {
+      most_recent = true
+    }
+    aws-ebs-csi-driver = {
+      most_recent   = true
+      addon_version = "v1.29.1-eksbuild.1"
+    }
+  }
+
   eks_managed_node_groups = {
     tibco_uat_ng = {
       min_size     = 1

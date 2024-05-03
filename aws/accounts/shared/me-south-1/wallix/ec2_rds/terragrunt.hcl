@@ -33,4 +33,7 @@ inputs = {
       volume_size = 100
     },
   ]
+  tags = {
+    BACKUP_ENABLED = "true"
+  }
 }

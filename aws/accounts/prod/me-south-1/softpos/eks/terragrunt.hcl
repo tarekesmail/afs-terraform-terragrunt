@@ -11,14 +11,14 @@ terraform {
 }
 
 inputs = {
-  cluster_name    = "Tibco-CloudAPI-UAT"
+  cluster_name    = "TF-SoftPOS-Prod"
   cluster_version = "1.29"
-  vpc_id          = "vpc-0f20c8a4e0e438497"
-  subnets         = ["subnet-0e5925d4407c1c8dd", "subnet-02b80bbe7fe38086e"]
+  vpc_id          = "vpc-0d4e2de3d4ab22aba"
+  subnets         = ["subnet-00992dac18828900c", "subnet-0a78dbdc847fff53c", "subnet-026b4abce884bf9e5"]
   access_entries = {
     jump_box_access = {
       kubernetes_groups = []
-      principal_arn     = "arn:aws:iam::533119714054:role/Tibco-Vendor-JS"
+      principal_arn     = "arn:aws:iam::370525687312:role/MS-Engineer"
       policy_associations = {
         single = {
           policy_arn = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
@@ -42,24 +42,20 @@ inputs = {
       most_recent = true
     }
     aws-ebs-csi-driver = {
-      most_recent = true
+      most_recent   = true
+      addon_version = "v1.29.1-eksbuild.1"
     }
-    aws-efs-csi-driver = {
-      most_recent = true
-    }
-
   }
 
   eks_managed_node_groups = {
-    tibco_cloudapi_uat_ng = {
-      min_size     = 1
+    softpos_ng = {
+      min_size     = 2
       max_size     = 10
-      desired_size = 1
+      desired_size = 2
       iam_role_additional_policies = {
         AmazonEBSCSIDriverPolicy = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
-        AmazonEFSCSIDriverPolicy = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
       }
-      instance_types = ["t3.medium"]
+      instance_types = ["t3.large"]
       capacity_type  = "ON_DEMAND"
 
     }

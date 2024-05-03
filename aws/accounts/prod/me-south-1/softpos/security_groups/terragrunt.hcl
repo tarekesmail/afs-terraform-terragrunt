@@ -10,13 +10,17 @@ terraform {
   source = local.base_source
 }
 
+dependency "eks_node_sg" {
+  config_path = "../eks"
+}
+
 inputs = {
-  name   = "SG-VISIONFLEX-BH5VFSTGSIT01"
-  vpc_id = "vpc-0f20c8a4e0e438497"
+  name   = "TF-BAH-SoftPos-Prod-redis"
+  vpc_id = "vpc-0d4e2de3d4ab22aba"
   ingress_rules = {
-    "22/tcp" = {
-      sources     = ["10.10.0.0/16", "10.71.0.0/16", "168.87.158.102/32", "168.87.158.101/32"]
-      description = "allow ingress SSH"
+    "6379/tcp" = {
+      sources     = [dependency.eks_node_sg.outputs.eks.node_security_group_id]
+      description = "allow ingress Redis"
     }
   }
   egress_rules = {
